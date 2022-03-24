@@ -1,2 +1,8 @@
-# covid19-parser
-COVId-19 statistikasi
+# COVID-19 
+## Foydalanish
+```python
+from covid19 import COVID19
+
+data = COVID19()
+print(data)
+```
