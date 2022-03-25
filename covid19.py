@@ -1,6 +1,7 @@
-from dataclasses import dataclass
+from unittest import result
 import requests
 from bs4 import BeautifulSoup as BS
+from typer import Typer
 
 
 class COVID19:
@@ -28,9 +29,17 @@ class COVID19:
         self.active_rate = self.active.split(' ')[0]
 
     def __str__(self):
-        return f'Confirmed: {self.confirmed}\nDeaths: {self.deaths}\nRecovered: {self.recovered}\nActive: {self.active}\nDeath Rate: {self.death_rate}\nRecovery Rate: {self.recovery_rate}\nActive Rate: {self.active_rate}'
+        result = dict()
+        result['confirmed'] = self.confirmed
+        result['deaths'] = self.deaths
+        result['recovered'] = self.recovered
+        result['active'] = self.active
+        result['death_rate'] = self.death_rate
+        result['recovery_rate'] = self.recovery_rate
+        result['active_rate'] = self.active_rate
+        return str(result)
 
-    def country(self, country):
+    def country(self, country: str = "uzbekistan"):
         """
         Davlat uchun satitstikasini olish uchun
 
@@ -95,3 +104,51 @@ class COVID19:
         ```
         """
         return self.active
+
+    def get_total_death_rate(self):
+        """
+        Butun dunyoda o'limlar to'plami
+
+        ```python
+        covid19 = COVID19()
+        print(covid19.get_total_death_rate())
+        ```
+        """
+        return self.death_rate
+
+    def get_total_recovery_rate(self):
+        """
+        Butun dunyoda tuzalganlar to'plami
+
+        ```python
+        covid19 = COVID19()
+        print(covid19.get_total_recovery_rate())
+        ```
+        """
+        return self.recovery_rate
+
+    def get_total_active_rate(self):
+        """
+        Butun dunyoda faoliyatlar to'plami
+
+        ```python
+        covid19 = COVID19()
+        print(covid19.get_total_active_rate())
+        ```
+        """
+        return self.active_rate
+
+    def get_total_death_rate_per_million(self):
+        """
+        Butun dunyoda o'limlar to'plami milliyoqdur
+
+        ```python
+        covid19 = COVID19()
+        print(covid19.get_total_death_rate_per_million())
+        ```
+        """
+        return self.death_rate
+
+
+data = COVID19()
+print(data)
