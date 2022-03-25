@@ -148,7 +148,3 @@ class COVID19:
         ```
         """
         return self.death_rate
-
-
-data = COVID19()
-print(data)
